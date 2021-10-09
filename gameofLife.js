@@ -1,4 +1,4 @@
-const tableDimension = 5;
+const tableDimension = 6;
 
 function tableCreator(dimension) {
   const arrayCreator = [];
@@ -62,7 +62,7 @@ function counterMatrixExtraction(matrixTable) {
         // eslint-disable-next-line no-param-reassign
         matrixTable[1][1] = 0;
       }
-      else if (numOne === 3 && matrixTable[1][1] === 0) {
+      else if (numOne === 3 && matrixTable[1][1] === 0 && numNeighboursRunned > 8) {
         // eslint-disable-next-line no-param-reassign
         matrixTable[1][1] = 1;
       }
@@ -72,6 +72,7 @@ function counterMatrixExtraction(matrixTable) {
 }
 
 function mainTableRunner(tableOrigin) {
+  // const wraperTables = [];
   const finalTable = tableCreator(tableDimension)
   for (let i = 0; i < tableOrigin.length; i += 1) {
     for (let z = 0; z < tableOrigin[i].length; z += 1) {
@@ -83,23 +84,20 @@ function mainTableRunner(tableOrigin) {
   return finalTable;
 }
 
-const firstTable = tableCreator(tableDimension)
-firstTable[2][2] = 1;
-firstTable[3][2] = 1;
-firstTable[1][2] = 1;
-console.table(firstTable);
-/* let endTable;
-for (let i = 0; i < 3; i++) {
-  if (i === 0) {
-    endTable = mainTableRunner(firstTable);
-    console.table(endTable);
-  }
-  else {
-    const m = mainTableRunner(endTable);
-    console.table(m);
-  }
+let firstTable = tableCreator(tableDimension)
 
-} */
+firstTable[1][1] = 1;
+firstTable[1][0] = 1;
+firstTable[2][1] = 1;
+firstTable[3][1] = 1;
+console.table(firstTable);
+// console.table(mainTableRunner(firstTable))
+
+for (let i = 0; i < 4; i += 1) {
+  firstTable = mainTableRunner(firstTable)
+  console.table(firstTable);
+}
+
 
 
 
