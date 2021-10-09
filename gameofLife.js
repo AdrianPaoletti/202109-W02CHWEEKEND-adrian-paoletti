@@ -70,7 +70,6 @@ function counterMatrixExtraction(matrixTable) {
 }
 
 function mainTableRunner(tableOrigin) {
-  // const wraperTables = [];
   const finalTable = tableCreator(tableDimension)
   for (let i = 0; i < tableOrigin.length; i += 1) {
     for (let z = 0; z < tableOrigin[i].length; z += 1) {
@@ -81,21 +80,11 @@ function mainTableRunner(tableOrigin) {
   }
   return finalTable;
 }
-
 const tableDimension = 6;
-let firstTable = tableCreator(tableDimension)
-
-firstTable[1][3] = 1;
-firstTable[1][2] = 1;
-firstTable[2][1] = 1;
-firstTable[2][3] = 1;
-firstTable[3][3] = 1;
-console.table(firstTable)
-
-for (let i = 0; i < 13; i += 1) {
-  firstTable = mainTableRunner(firstTable)
-  console.table(firstTable);
-}
+const divsY = document.querySelectorAll('.matrix__square');
+for (const div of divsY) {
+  console.log(div);
+};
 
 
 

@@ -19,6 +19,7 @@ body {
 }
 .matrix {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   border: 1px solid black;
   //height: 500px;
@@ -52,6 +53,7 @@ body {
   &__container-button {
     display: flex;
     margin: 10px;
+    margin-bottom: 23px;
     height: 100%;
   }
   &__button {

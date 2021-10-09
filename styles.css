@@ -21,6 +21,7 @@ body {
 
 .matrix {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   border: 1px solid black;
 }
@@ -54,6 +55,7 @@ body {
 .footer__container-button {
   display: flex;
   margin: 10px;
+  margin-bottom: 23px;
   height: 100%;
 }
 .footer__button {
