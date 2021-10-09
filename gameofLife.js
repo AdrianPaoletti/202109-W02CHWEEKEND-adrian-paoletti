@@ -1,5 +1,3 @@
-const tableDimension = 6;
-
 function tableCreator(dimension) {
   const arrayCreator = [];
   for (let i = 0; i < dimension; i += 1) {
@@ -17,12 +15,12 @@ function matrixExtraction(table, vertical, horizontal) {
     arrayCreation[i] = Array(3);
     if (((vertical - 1) + i) < 0) {
       for (let z = 0; z < 3; z += 1) {
-        arrayCreation[i][z] = undefined;
+        arrayCreation[i][z] = 0;
       }
     }
     else if (((vertical - 1) + i) === table.length) {
       for (let z = 0; z < 3; z += 1) {
-        arrayCreation[i][z] = undefined;
+        arrayCreation[i][z] = 0;
       }
     }
     else {
@@ -84,16 +82,17 @@ function mainTableRunner(tableOrigin) {
   return finalTable;
 }
 
+const tableDimension = 6;
 let firstTable = tableCreator(tableDimension)
 
-firstTable[1][1] = 1;
-firstTable[1][0] = 1;
+firstTable[1][3] = 1;
+firstTable[1][2] = 1;
 firstTable[2][1] = 1;
-firstTable[3][1] = 1;
-console.table(firstTable);
-// console.table(mainTableRunner(firstTable))
+firstTable[2][3] = 1;
+firstTable[3][3] = 1;
+console.table(firstTable)
 
-for (let i = 0; i < 4; i += 1) {
+for (let i = 0; i < 13; i += 1) {
   firstTable = mainTableRunner(firstTable)
   console.table(firstTable);
 }
