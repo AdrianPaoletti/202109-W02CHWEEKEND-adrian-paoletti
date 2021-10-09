@@ -1,8 +1,3 @@
-// Celda viva muere < 2 vecinos
-// Celda con 2 o 3 vive
-// Celda viva muere > 3 vecinos
-// Celta muerta == 3 vive
-
 const tableDimension = 5;
 
 function tableCreator(dimension) {
@@ -20,8 +15,20 @@ function matrixExtraction(table, vertical, horizontal) {
   const arrayCreation = [];
   for (let i = 0; i < 3; i += 1) {
     arrayCreation[i] = Array(3);
-    for (let z = 0; z < 3; z += 1) {
-      arrayCreation[i][z] = (table[(vertical - 1) + i][(horizontal - 1) + z]);
+    if (((vertical - 1) + i) < 0) {
+      for (let z = 0; z < 3; z += 1) {
+        arrayCreation[i][z] = undefined;
+      }
+    }
+    else if (((vertical - 1) + i) === table.length) {
+      for (let z = 0; z < 3; z += 1) {
+        arrayCreation[i][z] = undefined;
+      }
+    }
+    else {
+      for (let z = 0; z < 3; z += 1) {
+        arrayCreation[i][z] = (table[(vertical - 1) + i][(horizontal - 1) + z]);
+      }
     }
   }
   return arrayCreation;
@@ -34,7 +41,6 @@ function matrixInsertion(tableMatrix, endTalbe, vertical, horizontal) {
         // eslint-disable-next-line no-param-reassign
         endTalbe[(vertical - 1) + i][(horizontal - 1) + z] = tableMatrix[i][z];
       }
-
     }
   }
   return endTalbe
@@ -52,9 +58,13 @@ function counterMatrixExtraction(matrixTable) {
       else {
         numNeighboursRunned += 1;
       }
-      if (numOne < 3 && numNeighboursRunned > 8) {
+      if ((numOne < 3 || numOne > 4) && numNeighboursRunned > 8) {
         // eslint-disable-next-line no-param-reassign
         matrixTable[1][1] = 0;
+      }
+      else if (numOne === 3 && matrixTable[1][1] === 0) {
+        // eslint-disable-next-line no-param-reassign
+        matrixTable[1][1] = 1;
       }
     }
   }
@@ -65,25 +75,31 @@ function mainTableRunner(tableOrigin) {
   const finalTable = tableCreator(tableDimension)
   for (let i = 0; i < tableOrigin.length; i += 1) {
     for (let z = 0; z < tableOrigin[i].length; z += 1) {
-      if (tableOrigin[i][z] === 1) {
-        // console.log('-----------')
-        const tempMatrixExtraction = matrixExtraction(tableOrigin, i, z);
-        // console.table(tempMatrixExtraction)
-        const modifiedMatrix = counterMatrixExtraction(tempMatrixExtraction);
-        // console.table(modifiedMatrix)
-        matrixInsertion(modifiedMatrix, finalTable, i, z)
-
-      }
+      const tempMatrixExtraction = matrixExtraction(tableOrigin, i, z);
+      const modifiedMatrix = counterMatrixExtraction(tempMatrixExtraction);
+      matrixInsertion(modifiedMatrix, finalTable, i, z)
     }
   }
-  console.table(finalTable);
+  return finalTable;
 }
 
 const firstTable = tableCreator(tableDimension)
-firstTable[1][0] = 1;
-firstTable[2][0] = 1;
-firstTable[3][0] = 1;
+firstTable[2][2] = 1;
+firstTable[3][2] = 1;
+firstTable[1][2] = 1;
 console.table(firstTable);
-// mainTableRunner(firstTable);
+/* let endTable;
+for (let i = 0; i < 3; i++) {
+  if (i === 0) {
+    endTable = mainTableRunner(firstTable);
+    console.table(endTable);
+  }
+  else {
+    const m = mainTableRunner(endTable);
+    console.table(m);
+  }
+
+} */
+
 
 
