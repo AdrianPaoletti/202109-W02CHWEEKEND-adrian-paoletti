@@ -3,9 +3,7 @@
 // Celda viva muere > 3 vecinos
 // Celta muerta == 3 vive
 
-// const dimension = 5;
 
-/* console.table(tablerus); */
 function tableCreator(dimension) {
   const arrayCreator = [];
   for (let i = 0; i < dimension; i += 1) {
@@ -17,25 +15,40 @@ function tableCreator(dimension) {
   return arrayCreator;
 }
 
-const firstTable = tableCreator(5)
-console.table(firstTable)
-firstTable[1][2] = 1;
-firstTable[2][2] = 1;
-firstTable[3][2] = 1;
-console.table(firstTable);
-
 function matrixExtraction(table, vertical, horizontal) {
   const arrayCreation = [];
   for (let i = 0; i < 3; i += 1) {
     arrayCreation[i] = Array(3);
     for (let z = 0; z < 3; z += 1) {
-      arrayCreation[i][z] = (table[vertical + i][horizontal + z]);
-      console.log(arrayCreation[i][z])
+      arrayCreation[i][z] = (table[(vertical - 1) + i][(horizontal - 1) + z]);
     }
   }
   return arrayCreation;
 }
-console.table(matrixExtraction(firstTable, 0, 1));
+
+const firstTable = tableCreator(5)
+firstTable[1][2] = 1;
+firstTable[2][2] = 1;
+firstTable[3][2] = 1;
+console.table(firstTable);
+mainTableRunner(firstTable);
+// console.table(matrixExtraction(firstTable, 1, 2));
+
+function mainTableRunner(tableOrigin) {
+  for (let i = 0; i < tableOrigin.length; i += 1) {
+    for (let z = 0; z < tableOrigin[i].length; z += 1) {
+      if (tableOrigin[i][z] === 1) {
+        console.table(matrixExtraction(tableOrigin, i, z));
+      }
+    }
+  }
+}
+
+
+
+
+
+
 
 /* function matriExtraction(firstTable) {
   const arrayCreatior = [];
