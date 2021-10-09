@@ -10,6 +10,7 @@ body {
   border: 1px solid black;
   color: #2a4e97;
   text-align: center;
+  flex-grow: 1;
 }
 .header__title {
   font-size: 50px;
@@ -22,32 +23,32 @@ body {
   display: flex;
   justify-content: center;
   border: 1px solid black;
-  height: 75%;
 }
 .matrix__container {
   display: flex;
   justify-content: center;
   background-color: #404040;
-  flex-wrap: wrap;
   padding: 10px;
   border: 1px solid black;
-  max-width: 600px;
-  min-width: 590px;
-  height: 100%;
+  min-height: 490px;
 }
 .matrix__square {
   background-color: #7e7e7e;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border: 1px solid #989898;
+}
+.matrix__square:hover {
+  background-color: #ffff00;
 }
 
 .footer {
+  margin: 0;
   display: flex;
   justify-content: center;
+  flex-grow: 1;
   background: linear-gradient(#989898, #404040);
   border: 1px solid black;
-  height: 130px;
   color: #2a4e97;
 }
 .footer__container-button {
