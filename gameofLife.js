@@ -110,7 +110,6 @@ function mainTableRunner(tableOrigin) {
     }
   }
   changeTable(finalTable, tableOrigin)
-  console.log('I LOVE YOU SUSANAAAAAAAAAAAA');
   // eslint-disable-next-line no-param-reassign
   return tableOrigin;
 }
