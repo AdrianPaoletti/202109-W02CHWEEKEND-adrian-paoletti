@@ -37,6 +37,8 @@ body {
 }
 .matrix__square {
   background-color: #7e7e7e;
+  color: transparent;
+  font-size: 1px;
   width: 30px;
   height: 30px;
   border: 1px solid #989898;

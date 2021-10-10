@@ -17,18 +17,18 @@ function matrixExtraction(table, vertical, horizontal) {
     arrayCreation[i] = Array(3);
     if (((vertical - 1) + i) < 0) {
       for (let z = 0; z < 3; z += 1) {
-        arrayCreation[i][z] = undefined;
+        arrayCreation[i][z] = 0; // undefined;
       }
     }
     else if (((vertical - 1) + i) === table.length) {
       for (let z = 0; z < 3; z += 1) {
-        arrayCreation[i][z] = undefined;
+        arrayCreation[i][z] = 0;// undefined;
       }
     }
     else {
       for (let z = 0; z < 3; z += 1) {
         if (table[(vertical - 1) + i][(horizontal - 1) + z] === undefined) {
-          arrayCreation[i][z] = undefined;
+          arrayCreation[i][z] = 0;// undefined;
         }
         else {
           arrayCreation[i][z] = (table[(vertical - 1) + i][(horizontal - 1) + z]).innerHTML;
@@ -82,22 +82,6 @@ function counterMatrixExtraction(matrixTable) {
   return matrixTable;
 }
 
-function mainTableRunner(tableOrigin) {
-  const finalTable = tableCreator(tableDimension)
-  for (let i = 0; i < tableOrigin.length; i += 1) {
-    for (let z = 0; z < tableOrigin[i].length; z += 1) {
-      const tempMatrixExtraction = matrixExtraction(tableOrigin, i, z);
-      // console.table(tempMatrixExtraction);
-      const modifiedMatrix = counterMatrixExtraction(tempMatrixExtraction);
-      // console.table(modifiedMatrix);
-      // console.log('---')
-      matrixInsertion(modifiedMatrix, finalTable, i, z)
-    }
-  }
-  // eslint-disable-next-line no-param-reassign
-  return finalTable;
-}
-
 function changeTable(temporalTable, originalTable) {
   for (let i = 0; i < originalTable.length; i += 1) {
     for (let z = 0; z < originalTable[i].length; z += 1) {
@@ -113,9 +97,26 @@ function changeTable(temporalTable, originalTable) {
   return originalTable
 }
 
-// TABLE DIMENSION
-const tableDimension = 5;
+function mainTableRunner(tableOrigin) {
+  const finalTable = tableCreator(tableDimension)
+  for (let i = 0; i < tableOrigin.length; i += 1) {
+    for (let z = 0; z < tableOrigin[i].length; z += 1) {
+      const tempMatrixExtraction = matrixExtraction(tableOrigin, i, z);
+      // console.table(tempMatrixExtraction);
+      const modifiedMatrix = counterMatrixExtraction(tempMatrixExtraction);
+      // console.table(modifiedMatrix);
+      // console.log('---')
+      matrixInsertion(modifiedMatrix, finalTable, i, z)
+    }
+  }
+  changeTable(finalTable, tableOrigin)
+  console.log('I LOVE YOU SUSANAAAAAAAAAAAA');
+  // eslint-disable-next-line no-param-reassign
+  return tableOrigin;
+}
 
+// TABLE DIMENSION
+const tableDimension = 15;
 
 // SELECTOR INTO ARRAY
 const matrixDivsX = document.querySelectorAll('.matrix__square--Y > div');
@@ -132,13 +133,25 @@ for (let i = 0; i < matrixSelector.length; i += 1) {
 // COLOR YELLOW
 for (let i = 0; i < matrixSelector.length; i += 1) {
   for (let z = 0; z < matrixSelector[i].length; z += 1) {
-    // eslint-disable-next-line no-loop-func
     matrixSelector[i][z].addEventListener("click", () => {
       matrixSelector[i][z].style.background = "#FFFF00";
       matrixSelector[i][z].innerHTML = '1';
+
     });
   };
 };
+
+// FROM YELLOW TO GRAY
+for (let i = 0; i < matrixSelector.length; i += 1) {
+  for (let z = 0; z < matrixSelector[i].length; z += 1) {
+    matrixSelector[i][z].addEventListener("click", () => {
+      if (matrixSelector[i][z].style.background === "#FFFF00") {
+        matrixSelector[i][z].style.background = "#7e7e7e";
+      }
+    });
+  };
+};
+
 
 // BUTTON CLEAR
 const clearMatrix = document.querySelector('.footer__button--clear');
@@ -151,12 +164,17 @@ clearMatrix.addEventListener('click', () => {
   }
 })
 
-
 // BUTTON PLAY
 let playMatrix = document.querySelector('.footer__button--play');
+let intervalID;
 playMatrix.addEventListener('click', () => {
-  let changedTable = mainTableRunner(matrixSelector)
-  changeTable(changedTable, matrixSelector);
+  intervalID = window.setInterval(mainTableRunner, 1000, matrixSelector);
+})
+
+// BUTTON STOP
+const stopMatrix = document.querySelector('.footer__button--stop');
+stopMatrix.addEventListener('click', () => {
+  clearInterval(intervalID);
 })
 
 
