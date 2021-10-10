@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable prefer-const */
 function tableCreator(dimensionY, dimensionX) {
   const arrayCreator = [];
   for (let i = 0; i < dimensionY; i += 1) {
@@ -112,8 +110,8 @@ function mainTableRunner(tableOrigin) {
 function randomTable(tableOrigin) {
   for (let i = 0; i < tableOrigin.length; i += 1) {
     for (let z = 0; z < tableOrigin[i].length; z += 1) {
-      let number = Math.floor(Math.random() * (1 - 0 + 1) + 0);
-      let numberToString = number.toString();
+      const number = Math.floor(Math.random() * (1 - 0 + 1) + 0);
+      const numberToString = number.toString();
       tableOrigin[i][z].innerHTML = numberToString;
       if (number === 1) {
         tableOrigin[i][z].style.background = "#FFFF00";
@@ -128,13 +126,13 @@ const tableDimensionX = 30;
 
 // SELECTOR INTO ARRAY
 const matrixDivsX = document.querySelectorAll('.matrix__square--Y > div');
-let matrixSelector = tableCreator(tableDimensionY, tableDimensionX);
+const matrixSelector = tableCreator(tableDimensionY, tableDimensionX);
 let contador = 0;
 for (let i = 0; i < matrixSelector.length; i += 1) {
   for (let z = 0; z < matrixSelector[i].length; z += 1) {
     matrixSelector[i][z] = matrixDivsX[contador];
-    let number = Math.floor(Math.random() * (1 - 0 + 1) + 0);
-    let numberToString = number.toString();
+    const number = Math.floor(Math.random() * (1 - 0 + 1) + 0);
+    const numberToString = number.toString();
     matrixSelector[i][z].innerHTML = numberToString;
     if (number === 1) {
       matrixSelector[i][z].style.background = "#FFFF00";
@@ -178,10 +176,10 @@ clearMatrix.addEventListener('click', () => {
 })
 
 // BUTTON PLAY
-let playMatrix = document.querySelector('.footer__button--play');
+const playMatrix = document.querySelector('.footer__button--play');
 let intervalID;
 playMatrix.addEventListener('click', () => {
-  intervalID = window.setInterval(mainTableRunner, 800, matrixSelector);
+  intervalID = window.setInterval(mainTableRunner, 600, matrixSelector);
 })
 
 // BUTTON STOP
@@ -198,9 +196,8 @@ randomMatrix.addEventListener('click', () => {
   randomTable(matrixSelector);
   playMatrix.click();
 })
+
 playMatrix.click();
-
-
 
 
 
