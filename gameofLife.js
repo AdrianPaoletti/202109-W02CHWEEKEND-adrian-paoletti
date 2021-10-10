@@ -5,6 +5,7 @@ function tableCreator(dimensionY, dimensionX) {
   for (let i = 0; i < dimensionY; i += 1) {
     arrayCreator[i] = [0];
     for (let z = 0; z < dimensionX; z += 1) {
+
       arrayCreator[i][z] = 0;
     }
   }
@@ -108,6 +109,19 @@ function mainTableRunner(tableOrigin) {
   return tableOrigin;
 }
 
+function randomTable(tableOrigin) {
+  for (let i = 0; i < tableOrigin.length; i += 1) {
+    for (let z = 0; z < tableOrigin[i].length; z += 1) {
+      let number = Math.floor(Math.random() * (1 - 0 + 1) + 0);
+      let numberToString = number.toString();
+      tableOrigin[i][z].innerHTML = numberToString;
+      if (number === 1) {
+        tableOrigin[i][z].style.background = "#FFFF00";
+      }
+    }
+  }
+}
+
 // TABLE DIMENSION
 const tableDimensionY = 18;
 const tableDimensionX = 30;
@@ -119,7 +133,12 @@ let contador = 0;
 for (let i = 0; i < matrixSelector.length; i += 1) {
   for (let z = 0; z < matrixSelector[i].length; z += 1) {
     matrixSelector[i][z] = matrixDivsX[contador];
-    matrixSelector[i][z].innerHTML = '0';
+    let number = Math.floor(Math.random() * (1 - 0 + 1) + 0);
+    let numberToString = number.toString();
+    matrixSelector[i][z].innerHTML = numberToString;
+    if (number === 1) {
+      matrixSelector[i][z].style.background = "#FFFF00";
+    }
     contador += 1;
   }
 }
@@ -155,6 +174,7 @@ clearMatrix.addEventListener('click', () => {
       matrixSelector[i][z].innerHTML = '0';
     }
   }
+  clearInterval(intervalID);
 })
 
 // BUTTON PLAY
@@ -167,8 +187,18 @@ playMatrix.addEventListener('click', () => {
 // BUTTON STOP
 const stopMatrix = document.querySelector('.footer__button--stop');
 stopMatrix.addEventListener('click', () => {
+
   clearInterval(intervalID);
 })
+
+// BUTTON RANDOM
+const randomMatrix = document.querySelector('.footer__button--random');
+randomMatrix.addEventListener('click', () => {
+  clearInterval(intervalID);
+  randomTable(matrixSelector);
+  playMatrix.click();
+})
+playMatrix.click();
 
 
 
