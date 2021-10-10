@@ -81,10 +81,30 @@ function mainTableRunner(tableOrigin) {
   return finalTable;
 }
 const tableDimension = 6;
-const divsY = document.querySelectorAll('.matrix__square');
-for (const div of divsY) {
-  console.log(div);
+
+
+const matrixDivs = document.querySelectorAll('.matrix__square--Y > div');
+for (let i = 0; i < matrixDivs.length; i += 1) {
+  matrixDivs[i].addEventListener("click", () => {
+    matrixDivs[i].style.background = "yellow";
+  });
 };
+
+const clearMatrix = document.querySelector('.footer__button--clear');
+clearMatrix.addEventListener('click', () => {
+  for (let i = 0; i < matrixDivs.length; i += 1) {
+    matrixDivs[i].style.background = '#7e7e7e'
+  }
+
+})
+
+
+
+
+
+
+
+
 
 
 

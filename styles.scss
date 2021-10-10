@@ -6,7 +6,6 @@ body {
 }
 .header {
   background: linear-gradient(#404040, #989898);
-  border: 1px solid black;
   color: #2a4e97;
   text-align: center;
   flex-grow: 1;
@@ -20,15 +19,16 @@ body {
 .matrix {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  border: 1px solid black;
+  //margin-top: 10px;
   //height: 500px;
   &__container {
     display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
+    min-width: 500px;
     background-color: #404040;
     padding: 10px;
-    border: 1px solid black;
     min-height: 490px;
   }
   &__square {
@@ -37,7 +37,7 @@ body {
     height: 30px;
     border: 1px solid #989898;
     &:hover {
-      background-color: #ffff00;
+      background-color: #2a4e97;
     }
   }
 }
@@ -45,19 +45,18 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-grow: 1;
   background: linear-gradient(#989898, #404040);
-  border: 1px solid black;
-  //height: 100px;
   color: #2a4e97;
   &__container-button {
     display: flex;
-    margin: 10px;
+    padding-top: 20px;
     margin-bottom: 23px;
     height: 100%;
   }
   &__button {
-    color: lightblue;
+    color: #989898;
     font-size: 18px;
     margin: 5px;
     width: 100px;
