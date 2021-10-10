@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable prefer-const */
-function tableCreator(dimension) {
+function tableCreator(dimensionY, dimensionX) {
   const arrayCreator = [];
-  for (let i = 0; i < dimension; i += 1) {
+  for (let i = 0; i < dimensionY; i += 1) {
     arrayCreator[i] = [0];
-    for (let z = 0; z < dimension; z += 1) {
+    for (let z = 0; z < dimensionX; z += 1) {
       arrayCreator[i][z] = 0;
     }
   }
@@ -17,18 +17,18 @@ function matrixExtraction(table, vertical, horizontal) {
     arrayCreation[i] = Array(3);
     if (((vertical - 1) + i) < 0) {
       for (let z = 0; z < 3; z += 1) {
-        arrayCreation[i][z] = 0; // undefined;
+        arrayCreation[i][z] = 0;
       }
     }
     else if (((vertical - 1) + i) === table.length) {
       for (let z = 0; z < 3; z += 1) {
-        arrayCreation[i][z] = 0;// undefined;
+        arrayCreation[i][z] = 0;
       }
     }
     else {
       for (let z = 0; z < 3; z += 1) {
         if (table[(vertical - 1) + i][(horizontal - 1) + z] === undefined) {
-          arrayCreation[i][z] = 0;// undefined;
+          arrayCreation[i][z] = 0;
         }
         else {
           arrayCreation[i][z] = (table[(vertical - 1) + i][(horizontal - 1) + z]).innerHTML;
@@ -36,8 +36,6 @@ function matrixExtraction(table, vertical, horizontal) {
       }
     }
   }
-  /* console.log(arrayCreation);
-  console.log('---'); */
   return arrayCreation;
 }
 
@@ -45,7 +43,7 @@ function matrixInsertion(tableMatrix, endTalbe, vertical, horizontal) {
   for (let i = 0; i < tableMatrix.length; i += 1) {
     for (let z = 0; z < tableMatrix[i].length; z += 1) {
       if (i === 1 && z === 1) {
-        // eslint-disable-next-line no-param-reassign
+
         endTalbe[(vertical - 1) + i][(horizontal - 1) + z] = tableMatrix[i][z];
       }
     }
@@ -70,11 +68,11 @@ function counterMatrixExtraction(matrixTable) {
         numNeighboursRunned += 1;
       }
       if ((numOne < 3 || numOne > 4) && numNeighboursRunned > 8) {
-        // eslint-disable-next-line no-param-reassign
+
         matrixTable[1][1] = '0';
       }
       else if (numOne === 3 && matrixTable[1][1] === '0' && numNeighboursRunned > 8) {
-        // eslint-disable-next-line no-param-reassign
+
         matrixTable[1][1] = '1';
       }
     }
@@ -98,28 +96,25 @@ function changeTable(temporalTable, originalTable) {
 }
 
 function mainTableRunner(tableOrigin) {
-  const finalTable = tableCreator(tableDimension)
+  const finalTable = tableCreator(tableDimensionY, tableDimensionX)
   for (let i = 0; i < tableOrigin.length; i += 1) {
     for (let z = 0; z < tableOrigin[i].length; z += 1) {
       const tempMatrixExtraction = matrixExtraction(tableOrigin, i, z);
-      // console.table(tempMatrixExtraction);
       const modifiedMatrix = counterMatrixExtraction(tempMatrixExtraction);
-      // console.table(modifiedMatrix);
-      // console.log('---')
       matrixInsertion(modifiedMatrix, finalTable, i, z)
     }
   }
   changeTable(finalTable, tableOrigin)
-  // eslint-disable-next-line no-param-reassign
   return tableOrigin;
 }
 
 // TABLE DIMENSION
-const tableDimension = 15;
+const tableDimensionY = 18;
+const tableDimensionX = 30;
 
 // SELECTOR INTO ARRAY
 const matrixDivsX = document.querySelectorAll('.matrix__square--Y > div');
-let matrixSelector = tableCreator(tableDimension);
+let matrixSelector = tableCreator(tableDimensionY, tableDimensionX);
 let contador = 0;
 for (let i = 0; i < matrixSelector.length; i += 1) {
   for (let z = 0; z < matrixSelector[i].length; z += 1) {
@@ -151,7 +146,6 @@ for (let i = 0; i < matrixSelector.length; i += 1) {
   };
 };
 
-
 // BUTTON CLEAR
 const clearMatrix = document.querySelector('.footer__button--clear');
 clearMatrix.addEventListener('click', () => {
@@ -167,7 +161,7 @@ clearMatrix.addEventListener('click', () => {
 let playMatrix = document.querySelector('.footer__button--play');
 let intervalID;
 playMatrix.addEventListener('click', () => {
-  intervalID = window.setInterval(mainTableRunner, 1000, matrixSelector);
+  intervalID = window.setInterval(mainTableRunner, 800, matrixSelector);
 })
 
 // BUTTON STOP

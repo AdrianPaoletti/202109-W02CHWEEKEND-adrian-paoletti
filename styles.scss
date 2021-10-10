@@ -1,23 +1,47 @@
+@font-face {
+  font-family: "Teko";
+  src: url(/fonts/Teko-Bold.ttf);
+  //font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Teko-Semi";
+  src: url(/fonts/Teko-SemiBold.ttf);
+  //font-weight: normal;
+  font-style: normal;
+}
+
 body {
   display: flex;
   flex-direction: column;
   margin: 0;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  font-family: "Teko";
 }
 .header {
   background: linear-gradient(#404040, #989898);
   color: #2a4e97;
   text-align: center;
+  border-bottom: 3px solid #2a4e97;
   &__title {
-    font-size: 50px;
+    margin: 0;
+    margin-top: 10px;
+    font-size: 70px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgba(255, 255, 0, 0.651);
+  }
+  &__author {
+    font-size: 20px;
+    margin: 0;
     margin-bottom: 5px;
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #7e7e7e;
+    -webkit-text-stroke-color: rgba(255, 255, 0, 0.356);
   }
 }
 .matrix {
   display: flex;
   flex-direction: column;
+  border-top: 1px solid rgba(255, 255, 0, 0.651);
+  border-bottom: 1px solid rgba(255, 255, 0, 0.651);
   //margin-top: 10px;
   //height: 500px;
   &__container {
@@ -38,8 +62,8 @@ body {
     background-color: #7e7e7e;
     color: transparent;
     font-size: 1px;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     border: 1px solid #989898;
     &:hover {
       background-color: #2a4e97;
@@ -54,18 +78,23 @@ body {
   flex-grow: 1;
   background: linear-gradient(#989898, #404040);
   color: #2a4e97;
+  border-top: 3px solid #2a4e97;
   &__container-button {
     display: flex;
-    padding-top: 20px;
-    margin-bottom: 23px;
+    padding-top: 15px;
+    margin-bottom: 15px;
     height: 100%;
   }
   &__button {
     color: #989898;
-    font-size: 18px;
+    font-family: "Teko-Semi";
+    font-size: 22px;
     margin: 5px;
     width: 100px;
     height: 50px;
     background-color: #2a4e97;
+    &:hover {
+      box-shadow: 0px 0px 7px rgba(255, 255, 0, 0.651) inset;
+    }
   }
 }
